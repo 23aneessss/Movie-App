@@ -1,10 +1,11 @@
+import 'react-native-url-polyfill/auto';
 import { Tabs } from "expo-router";
 import { ImageBackground, Image, Text, View } from "react-native";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 
 
-const TabLayout = ( { focused, icon, title } ) => {
+const TabLayout = ( { focused, icon, title }: any ) => {
 
   if ( focused ) {
     return (
