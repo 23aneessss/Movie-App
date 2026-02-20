@@ -17,10 +17,10 @@ interface Movie {
 
 interface TrendingMovie {
   searchTerm: string;
-  movie_id: number;
+  movieId: number;
   title: string;
   count: number;
-  poster_url: string;
+  posterUrl: string;
 }
 
 interface MovieDetails {
@@ -74,4 +74,27 @@ interface MovieDetails {
 interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
+}
+
+interface SessionUserDTO {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+  createdAt: string;
+}
+
+interface SavedMovieDTO {
+  tmdbMovieId: number;
+  title: string;
+  posterPath: string;
+  releaseDate: string;
+  voteAverage: number;
+  isWatched: boolean;
+  savedAt: string;
+}
+
+interface MovieSavedStatus {
+  isFavorite: boolean;
+  isWatched: boolean;
 }

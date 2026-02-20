@@ -9,8 +9,7 @@ import {
 import { useRouter } from "expo-router";
 
 import useFetch from "@/services/useFetch";
-import { fetchMovies } from "@/services/api";
-import { getTrendingMovies } from "@/services/appwrite";
+import { fetchMovies, fetchTrendingMovies } from "@/services/api";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -26,7 +25,7 @@ const Index = () => {
     data: trendingMovies,
     loading: trendingLoading,
     error: trendingError,
-  } = useFetch(getTrendingMovies);
+  } = useFetch(fetchTrendingMovies);
 
   const {
     data: movies,
@@ -82,7 +81,7 @@ const Index = () => {
                   renderItem={({ item, index }) => (
                     <TrendingCard movie={item} index={index} />
                   )}
-                  keyExtractor={(item) => item.movie_id.toString()}
+                  keyExtractor={(item) => item.movieId.toString()}
                   ItemSeparatorComponent={() => <View className="w-4" />}
                 />
               </View>

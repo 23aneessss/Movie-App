@@ -1,0 +1,37 @@
+{
+  "name": "movie-app-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@better-auth/expo": "^1.3.8",
+    "better-auth": "^1.3.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "drizzle-orm": "^0.44.7",
+    "express": "^4.21.2",
+    "pg": "^8.16.3",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.6.0",
+    "@types/pg": "^8.15.6",
+    "@types/supertest": "^6.0.3",
+    "drizzle-kit": "^0.31.9",
+    "supertest": "^7.1.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,4 +1,4 @@
-import { Text, View  , Image, TextInput} from 'react-native'
+import { View  , Image, TextInput} from 'react-native'
 import { icons } from '@/constants/icons'
 
 interface Props {

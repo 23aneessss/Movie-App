@@ -1,49 +1,75 @@
-# Movie App
+# Movio (Movie App)
 
-Une application mobile (Expo + React Native) affichant des films provenant de l'API TMDB.
+Movio est une application mobile Expo (React Native + TypeScript) connectee a un backend Express, PostgreSQL, Drizzle et BetterAuth.
+L’app permet de decouvrir des films, de les sauvegarder en favoris, de marquer les films vus et de gerer un profil utilisateur.
 
-## Fonctionnalités principales
-- Liste et cartes de films populaires / tendances
-- Page de détails d'un film (affiche, titre, date, durée, note, synopsis, genres, sociétés de production)
-- Recherche de films
-- Interface optimisée pour mobile (simulator / device)
+Guide complet de demarrage: `SETUP_AND_RUN.md`
 
-## Technologies
-- Expo (React Native)
-- TypeScript
-- Expo Router (file-based routing)
-- NativeWind (Tailwind pour React Native)
-- TMDB API (The Movie Database)
-- Axios / fetch pour les requêtes réseau
-- Appwrite (présent dans `services/appwrite.ts` — optionnel selon votre configuration)
+## Apercu
+- Mobile: Expo Router + NativeWind
+- Backend: Express TypeScript + BetterAuth + Drizzle + PostgreSQL
+- Source des films: TMDB (via backend)
 
-## Structure du projet
-- `app/` : pages et routes
-- `components/` : composants réutilisables (`MovieCard`, `SearchBar`, `TrendingCard`, ...)
-- `services/` : appels API et hooks (`api.ts`, `useFetch.ts`, `appwrite.ts`)
-- `constants/` : images et icônes
-- `tailwind.config.js` : configuration NativeWind / Tailwind
+## Fonctionnalites
+- Onboarding de demarrage
+- Authentification:
+  - Email / mot de passe
+  - OAuth Google
+- Films:
+  - Discover (popular)
+  - Recherche
+  - Details
+  - Trending base sur les recherches
+- Saved:
+  - Favoris
+  - Watched (uniquement pour les favoris)
+  - Defavoriser
+- Profil:
+  - Infos utilisateur
+  - Logout
 
-## Installation & exécution
-1. Installer les dépendances :
+## Architecture du projet
+- `app/`: ecrans Expo Router
+- `components/`: composants reutilisables
+- `services/`: appels API mobile
+- `backend/`: API Express + Drizzle + BetterAuth
 
+## Demarrage rapide
+1. Installer les dependances:
 ```bash
 npm install
+npm --prefix backend install
 ```
 
-2. Créer un fichier `.env` à la racine (il est ignoré par git via `.gitignore`) et ajouter vos clés :
+2. Configurer les variables d’environnement:
+- `.env` (mobile)
+- `backend/.env` (backend)
 
-```
-TMDB_API_KEY=your_tmdb_api_key_here
-# si vous utilisez Appwrite
-APPWRITE_ENDPOINT=...
-APPWRITE_PROJECT_ID=...
-```
+Voir `SETUP_AND_RUN.md` pour les valeurs exactes et ou les recuperer.
 
-3. Lancer l'application :
-
+3. Appliquer les migrations:
 ```bash
-npx expo start -c
+npm --prefix backend run db:migrate
 ```
 
-Puis ouvrir sur un simulateur iOS/Android ou sur un appareil.
+4. Lancer tout le projet:
+```bash
+npm run dev
+```
+
+## Endpoints principaux (backend)
+- `GET /health`
+- `GET /api/movies/discover`
+- `GET /api/movies/search?q=...`
+- `GET /api/movies/:id`
+- `GET /api/movies/trending`
+- `GET /api/me`
+- `GET /api/me/saved?tab=favorites|watched`
+- `POST /api/me/saved`
+- `PATCH /api/me/saved/:tmdbMovieId/watched`
+- `DELETE /api/me/saved/:tmdbMovieId`
+- `ALL /api/auth/*`
+
+## Notes
+- Toute la logique (auth, saved, trending, TMDB) passe par le backend.
+- Le mobile n’appelle plus directement TMDB ou Appwrite.

@@ -6,7 +6,6 @@ import { icons } from "@/constants/icons";
 
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
-import { updateSearchCount } from "@/services/appwrite";
 
 import SearchBar from "@/components/SearchBar";
 import MovieDisplayCard from "@/components/MovieCard";
@@ -37,15 +36,8 @@ const Search = () => {
     }, 800);
 
     return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
-
-    useEffect(() => {
-      if(movies && movies?.length > 0 && movies?.[0]){
-        updateSearchCount(searchQuery , movies[0])
-      }
-    }, [movies])
-
-    
 
   return (
     <View className="flex-1 bg-primary">
